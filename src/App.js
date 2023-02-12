@@ -1,5 +1,9 @@
 import './App.css';
 import { Component } from 'react';
+import CardList from './components/card-list/card-list';
+import SearchBox from './components/search-box/search-box';
+
+
 class App extends Component {
   // Order run : 1
   constructor()
@@ -35,6 +39,11 @@ class App extends Component {
   }
 
   // This is what you are rendering
+  /*
+    The render function is called every time the component's 
+    state or props change, allowing React to efficiently update 
+    the component's visual representation on the screen.
+  */
   // Order run : 2
   render() {
     const filtredMonsters = this.state.monsters.filter((monster) => {
@@ -43,17 +52,9 @@ class App extends Component {
 
     return (
       <div className="App">
-        <input 
-          className='search-box'
-          type='text'
-          placeholder='search monsters'
-          onChange={this.onSearchChange}
-        />
-        {filtredMonsters.map((monster) => {
-          return (<div key={monster.id}>
-            <h1>{monster.name}</h1>
-          </div>);
-        })}
+        <h1 className='app-title'>Monsters Rolodex</h1>
+        <SearchBox onChangeHandler={this.onSearchChange} placeholder='search a monster'/>
+        <CardList monsters={filtredMonsters}/>
       </div>
     );
   }
